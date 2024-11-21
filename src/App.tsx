@@ -1,22 +1,37 @@
-import { useState } from 'react';
 import './App.css';
-import { ATTRIBUTE_LIST, CLASS_LIST, SKILL_LIST } from './consts.js';
+import styled from 'styled-components';
+import { AttributesProvider } from './hooks/useAttributes';
+import ClassTable from './components/ClassTable';
+import AttributesTable from './components/AttributesTable';
+import SkillsTable from './components/SkillsTable';
 
+const TableContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+`;
+
+export const ColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`;
 
 function App() {
-  const [num, setNum] = useState<number>(0);
   return (
     <div className="App">
       <header className="App-header">
-        <h1>React Coding Exercise</h1>
+        <h1>Character Sheet</h1>
       </header>
       <section className="App-section">
-        <div>
-          Value:
-          {num}
-          <button>+</button>
-          <button>-</button>
-        </div>
+        <AttributesProvider>
+          <TableContainer>
+            <AttributesTable />
+            <ClassTable />
+            <SkillsTable />
+          </TableContainer>
+        </AttributesProvider>
       </section>
     </div>
   );
